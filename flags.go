@@ -56,7 +56,7 @@ func usage() {
 
 Usage:
 
-	go [arguments] command filename
+	todo [arguments] command filename
 
 The commands are:
 
