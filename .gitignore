@@ -1,3 +1,6 @@
 *
 !*.go
+!cmd/
+!cmd/todo/
+!cmd/todo/*.go
 !LICENSE

@@ -6,6 +6,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/esote/todo"
 	"os"
 )
 
@@ -13,7 +14,7 @@ import (
 type flags struct {
 	ID int // -n
 
-	item Item // -amess -adet -acat -apr
+	item todo.Item // -amess -adet -acat -apr
 
 	verbose bool // -v
 }

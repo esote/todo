@@ -1,7 +1,7 @@
 // Copyright 2018 Esote. All rights reserved. Use of this source code is
 // governed by an MIT license that can be found in the LICENSE file.
 
-package main
+package todo
 
 import (
 	"bufio"
@@ -23,7 +23,8 @@ type Item struct {
 	Priority int    `json:"priority"`
 }
 
-func readJSON(name string) ([]Item, error) {
+//ReadJSON converts json into Item slice
+func ReadJSON(name string) ([]Item, error) {
 	b, err := ioutil.ReadFile(name)
 
 	if err != nil {
@@ -36,7 +37,8 @@ func readJSON(name string) ([]Item, error) {
 	return items, err
 }
 
-func writeJSON(items []Item, name string) (err error) {
+//WriteJSON writes Item slice to file
+func WriteJSON(items []Item, name string) (err error) {
 	var b []byte
 
 	b, err = json.Marshal(items)
@@ -48,7 +50,8 @@ func writeJSON(items []Item, name string) (err error) {
 	return ioutil.WriteFile(name, b, 0600)
 }
 
-func readItem() (i Item, err error) {
+//ReadItem fills item with input from stderr
+func ReadItem() (i Item, err error) {
 	r := bufio.NewReader(os.Stdin)
 
 	// Message.
@@ -63,7 +66,7 @@ func readItem() (i Item, err error) {
 
 	// Details.
 	fmt.Println("Details (reads until 'END'):")
-	i.Details, err = readDetails(r)
+	i.Details, err = ReadDetails(r)
 
 	if err != nil {
 		return
@@ -97,7 +100,8 @@ func readItem() (i Item, err error) {
 	return
 }
 
-func readDetails(r *bufio.Reader) (string, error) {
+//ReadDetails reads details from a specfied Reader
+func ReadDetails(r *bufio.Reader) (string, error) {
 	var b bytes.Buffer
 	var l string
 	var err error
