@@ -1,7 +1,7 @@
 // Copyright 2018 Esote. All rights reserved. Use of this source code is
 // governed by an MIT license that can be found in the LICENSE file.
 
-package main
+package todo
 
 import (
 	"bufio"
@@ -11,7 +11,8 @@ import (
 	"unicode"
 )
 
-func confirm(msg string) error {
+//Confirm wraps a message and asks for confirm
+func Confirm(msg string) error {
 	r := bufio.NewReader(os.Stdin)
 
 	fmt.Print(msg + " [y/N]: ")
@@ -29,7 +30,7 @@ func confirm(msg string) error {
 	return nil
 }
 
-func findItem(items []Item, ID int) (index int, err error) {
+func FindItem(items []Item, ID int) (index int, err error) {
 	var ok bool
 
 	for n, i := range items {
@@ -47,7 +48,7 @@ func findItem(items []Item, ID int) (index int, err error) {
 	return
 }
 
-func nextID(items []Item) int {
+func NextID(items []Item) int {
 	used := make(map[int]bool)
 
 	for _, i := range items {

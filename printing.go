@@ -1,7 +1,7 @@
 // Copyright 2018 Esote. All rights reserved. Use of this source code is
 // governed by an MIT license that can be found in the LICENSE file.
 
-package main
+package todo
 
 import (
 	"fmt"
@@ -10,7 +10,8 @@ import (
 	"text/tabwriter"
 )
 
-func printItems(items []Item, verbose bool) error {
+//PrintItems dumps a slice of items, optionally being a bit more verbose
+func PrintItems(items []Item, verbose bool) error {
 	t := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', 0)
 
 	var header string
@@ -46,7 +47,8 @@ func printItems(items []Item, verbose bool) error {
 	return t.Flush()
 }
 
-func printDetailed(i Item) error {
+//PrintDetailed dumps info from item
+func PrintDetailed(i Item) error {
 	t := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
 
 	i.Message = strings.Replace(i.Message, "\n", "\n\t| ", -1)
