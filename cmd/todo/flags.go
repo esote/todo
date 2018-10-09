@@ -62,8 +62,9 @@ Usage:
 The commands are:
 
 	append    append an item to the list
-	edit      edit an existing list item
 	delete    delete an item in the list
+	edit      edit an existing list item
+	init      initialize a new todo list
 	view      view item(s) from the list
 
 The arguments are:

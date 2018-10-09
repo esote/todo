@@ -38,6 +38,10 @@ func main() {
 }
 
 func parseCommand(cmd, name string) (err error) {
+	if cmd == "init" {
+		return todo.InitJSON(name)
+	}
+
 	var items []todo.Item
 
 	if items, err = todo.ReadJSON(name); err != nil {

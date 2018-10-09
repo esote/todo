@@ -122,3 +122,17 @@ func ReadDetails(r *bufio.Reader) (string, error) {
 
 	return b.String(), err
 }
+
+func InitJSON(name string) error {
+	if _, err := os.Stat(name); !os.IsNotExist(err) {
+		if err == nil {
+			return fmt.Errorf("file %s already exists", name)
+		} else {
+			return err
+		}
+	}
+
+	b := []byte("[]\n")
+
+	return ioutil.WriteFile(name, b, 0600)
+}
