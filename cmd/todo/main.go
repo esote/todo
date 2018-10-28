@@ -8,9 +8,10 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"github.com/esote/todo"
 	"log"
 	"strings"
+
+	"github.com/esote/todo"
 )
 
 var (
@@ -79,7 +80,9 @@ func parseCommand(cmd, name string) (err error) {
 			return
 		}
 
-		todo.PrintDetailed(items[index])
+		if err = todo.PrintDetailed(items[index]); err != nil {
+			return
+		}
 
 		msg := "Are you sure you want to overwrite this item?"
 		if err = todo.Confirm(msg); err != nil {
@@ -109,7 +112,9 @@ func parseCommand(cmd, name string) (err error) {
 			return
 		}
 
-		todo.PrintDetailed(items[index])
+		if err = todo.PrintDetailed(items[index]); err != nil {
+			return
+		}
 
 		msg := "Are you sure you want to delete this item?"
 		if err = todo.Confirm(msg); err != nil {
@@ -124,7 +129,9 @@ func parseCommand(cmd, name string) (err error) {
 
 	case "view":
 		if fl.ID == dfl.ID {
-			todo.PrintItems(items, fl.verbose)
+			if err = todo.PrintItems(items, fl.verbose); err != nil {
+				return
+			}
 		} else {
 			var index int
 
@@ -132,7 +139,9 @@ func parseCommand(cmd, name string) (err error) {
 				return
 			}
 
-			todo.PrintDetailed(items[index])
+			if err = todo.PrintDetailed(items[index]); err != nil {
+				return
+			}
 		}
 
 	default:

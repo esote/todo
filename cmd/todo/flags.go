@@ -6,8 +6,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/esote/todo"
+	"log"
 	"os"
+
+	"github.com/esote/todo"
 )
 
 // Flags represents the possible command line flags.
@@ -52,7 +54,7 @@ Used with {edit} to overwrite an item's priority.`)
 }
 
 func usage() {
-	fmt.Fprintf(os.Stderr,
+	_, err := fmt.Fprintf(os.Stderr,
 		`Todo is a list management tool.
 
 Usage:
@@ -70,6 +72,10 @@ The commands are:
 The arguments are:
 
 `)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	flag.PrintDefaults()
 }

@@ -24,7 +24,9 @@ func PrintItems(items []Item, verbose bool) error {
 			"--\t---------\t----------\t----------"
 	}
 
-	fmt.Fprintln(t, header)
+	if _, err := fmt.Fprintln(t, header); err != nil {
+		return err
+	}
 
 	for _, i := range items {
 		i.Message = strings.Replace(i.Message, "\n", "\\n", -1)
@@ -36,11 +38,15 @@ func PrintItems(items []Item, verbose bool) error {
 		i.Category = strings.Replace(i.Category, "\n", "\\n", -1)
 
 		if verbose {
-			fmt.Fprintf(t, "%d\t| %s\t| %s\t| %s\t| %d\n",
-				i.ID, i.Message, i.Details, i.Category, i.Priority)
+			if _, err := fmt.Fprintf(t, "%d\t| %s\t| %s\t| %s\t| %d\n", i.ID,
+				i.Message, i.Details, i.Category, i.Priority); err != nil {
+				return err
+			}
 		} else {
-			fmt.Fprintf(t, "%d\t| %s\t| %s\t| %d\n",
-				i.ID, i.Message, i.Category, i.Priority)
+			if _, err := fmt.Fprintf(t, "%d\t| %s\t| %s\t| %d\n",
+				i.ID, i.Message, i.Category, i.Priority); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -55,11 +61,25 @@ func PrintDetailed(i Item) error {
 	i.Details = strings.Replace(i.Details, "\n", "\n\t| ", -1)
 	i.Category = strings.Replace(i.Category, "\n", "\n\t| ", -1)
 
-	fmt.Fprintln(t, "ID\t:", i.ID)
-	fmt.Fprintln(t, "Message\t:", i.Message)
-	fmt.Fprintln(t, "Details\t:", i.Details)
-	fmt.Fprintln(t, "Category\t:", i.Category)
-	fmt.Fprintln(t, "Priority\t:", i.Priority)
+	if _, err := fmt.Fprintln(t, "ID\t:", i.ID); err != nil {
+		return err
+	}
+
+	if _, err := fmt.Fprintln(t, "Message\t:", i.Message); err != nil {
+		return err
+	}
+
+	if _, err := fmt.Fprintln(t, "Details\t:", i.Details); err != nil {
+		return err
+	}
+
+	if _, err := fmt.Fprintln(t, "Category\t:", i.Category); err != nil {
+		return err
+	}
+
+	if _, err := fmt.Fprintln(t, "Priority\t:", i.Priority); err != nil {
+		return err
+	}
 
 	return t.Flush()
 }

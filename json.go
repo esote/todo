@@ -123,13 +123,14 @@ func ReadDetails(r *bufio.Reader) (string, error) {
 	return b.String(), err
 }
 
+// InitJSON creates an empty todo list file
 func InitJSON(name string) error {
 	if _, err := os.Stat(name); !os.IsNotExist(err) {
 		if err == nil {
 			return fmt.Errorf("file %s already exists", name)
-		} else {
-			return err
 		}
+
+		return err
 	}
 
 	b := []byte("[]\n")

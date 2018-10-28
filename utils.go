@@ -30,6 +30,7 @@ func Confirm(msg string) error {
 	return nil
 }
 
+// FindItem finds an item with ID
 func FindItem(items []Item, ID int) (index int, err error) {
 	var ok bool
 
@@ -48,6 +49,7 @@ func FindItem(items []Item, ID int) (index int, err error) {
 	return
 }
 
+// NextID gets the next available ID
 func NextID(items []Item) int {
 	used := make(map[int]bool)
 
